@@ -6,6 +6,8 @@ class FormState {
     required this.pageIndex,
     required this.reverse,
     required this.subjectId,
+    required this.claimId,
+    required this.claimValue,
     required this.lawsuitSubjects,
     required this.selectedClient,
     required this.clientName,
@@ -21,6 +23,8 @@ class FormState {
         pageIndex: 0,
         reverse: false,
         subjectId: -1,
+        claimId: 0,
+        claimValue: 0,
         lawsuitSubjects: [],
         selectedClient: ClientType.person,
         clientNumber: '',
@@ -35,6 +39,9 @@ class FormState {
   final int pageIndex;
   final bool reverse;
   final int subjectId;
+  final int claimId;
+  final double? claimValue;
+
   final List<LawsuitSubject> lawsuitSubjects;
   final ClientType selectedClient;
   final String? clientName;
@@ -49,6 +56,8 @@ class FormState {
     int? pageIndex,
     bool? reverse,
     int? subjectId,
+    int? claimId,
+    double? claimValue,
     List<LawsuitSubject>? lawsuitSubjects,
     int? selectedForm,
     ClientType? selectedClient,
@@ -64,6 +73,8 @@ class FormState {
       pageIndex: pageIndex ?? this.pageIndex,
       reverse: reverse ?? this.reverse,
       subjectId: subjectId ?? this.subjectId,
+      claimId: claimId ?? this.claimId,
+      claimValue: claimValue ?? this.claimValue,
       lawsuitSubjects: lawsuitSubjects ?? this.lawsuitSubjects,
       selectedClient: selectedClient ?? this.selectedClient,
       clientName: clientName ?? this.clientName,
