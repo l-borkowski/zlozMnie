@@ -5,7 +5,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-export 'cubit/form_cubit.dart';
-export 'view/client_data_view.dart';
-export 'view/form_page.dart';
-export 'view/widgets/widgets.dart';
+/// A Very Good Project created by Very Good CLI.
+library zloz_mnie_api_client;
+
+export 'src/zloz_mnie_api_client.dart';
