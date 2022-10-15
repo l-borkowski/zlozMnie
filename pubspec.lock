@@ -170,6 +170,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
+  function_tree:
+    dependency: transitive
+    description:
+      name: function_tree
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.8.13"
   glob:
     dependency: transitive
     description:
@@ -275,6 +282,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
+  money_input_formatter:
+    dependency: "direct main"
+    description:
+      name: money_input_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   nested:
     dependency: transitive
     description:

@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:lawsuit_repository/lawsuit_repository.dart';
 import 'package:lawsuit_repository/models/lawsuit_subject.dart';
 
@@ -31,6 +32,20 @@ class FormCubit extends Cubit<FormState> {
           reverse: true,
         ),
       );
+
+  void selectClaimType(int id) => emit(
+        state.copyWith(
+          claimId: id,
+          reverse: true,
+        ),
+      );
+
+  void claimValueChanged(String text) {
+    final value = double.tryParse(text);
+
+    
+    emit(state.copyWith(claimValue: value ?? 0));
+  }
 
   Future<void> loadLawsuitSubjects() async {
     if (state.lawsuitSubjects.isNotEmpty) return;
