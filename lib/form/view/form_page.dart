@@ -91,7 +91,6 @@ class _FormPart extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         color: Colors.white,
-        child: LayoutBuilder(builder: builder),
       ),
     );
   }
