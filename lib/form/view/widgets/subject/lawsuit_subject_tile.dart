@@ -22,10 +22,7 @@ class LawsuitSubjectTile extends StatelessWidget {
         onTap: () => context.read<FormCubit>().selectSubject(lawsuitSubject.id),
         child: AnimatedContainer(
           curve: Curves.fastLinearToSlowEaseIn,
-          constraints: const BoxConstraints(
-            minWidth: 400,
-          ),
-          width: 800,
+          width: double.infinity,
           duration: 600.milliseconds,
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
