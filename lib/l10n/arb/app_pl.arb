@@ -2,5 +2,15 @@
     "@@locale": "pl",
     "login": "Zaloguj się",
     "fileMe": "Złóż mnie",
-    "fileMeDesc": "Innowacyjna platforma do składania pozwów online"
+    "fileMeDesc": "Innowacyjna platforma do składania pozwów online",
+    "form1": "Właściwość rzeczowa",
+    "form2": "Wartość przedmiotu sporu",
+    "form3": "Właściwość miejscowa",
+    "form4": "Powód",
+    "form5": "Pełnomocnik ",
+    "form6": "Zgody",
+    "form7": "Treść",
+    "form8": "Podsumowanie",
+    "form9": "Opłata",
+    "form10": "Podpis"
 }

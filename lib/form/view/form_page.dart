@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:zloz_mnie/form/cubit/form_cubit.dart';
+import 'package:zloz_mnie/form/form.dart';
 
 class FormPage extends StatelessWidget {
   const FormPage({super.key});
@@ -56,6 +56,25 @@ class _ListPart extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         color: const Color(0xFF4971FF),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Column(
+              children: const [
+                Spacer(),
+                FormList(),
+                Spacer(flex: 2),
+              ],
+            ),
+            Column(
+              children: const [
+                Spacer(),
+                FormListDots(),
+                Spacer(flex: 2),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -72,6 +91,7 @@ class _FormPart extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         color: Colors.white,
+        child: LayoutBuilder(builder: builder),
       ),
     );
   }
