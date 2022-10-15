@@ -22,26 +22,35 @@ class SubjectView extends HookWidget {
       appBar: const FormViewAppBar(
         title: 'Zwrot kosztów procesu i odsetki',
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Wskaż przedmiot podnoszonego roszczenia i jego rodzaj.',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Wskaż przedmiot podnoszonego roszczenia i jego rodzaj.',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            ),
-            if (state.lawsuitSubjects.isEmpty) ...[
-              const SizedBox(height: 300),
-              const Center(
-                child: CircularProgressIndicator(),
-              )
-            ] else
-              ...state.lawsuitSubjects.map(LawsuitSubjectTile.new)
-          ],
+              if (state.lawsuitSubjects.isEmpty) ...[
+                const SizedBox(height: 300),
+                const Center(
+                  child: CircularProgressIndicator(),
+                )
+              ] else ...[
+                const SizedBox(height: 30),
+                ...state.lawsuitSubjects.map(
+                  (subject) => LawsuitSubjectTile(
+                    subject,
+                    isSelected: state.subjectId == subject.id,
+                  ),
+                ),
+              ]
+            ],
+          ),
         ),
       ),
     );

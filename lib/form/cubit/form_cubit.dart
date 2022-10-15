@@ -27,7 +27,7 @@ class FormCubit extends Cubit<FormState> {
 
   void selectSubject(int id) => emit(
         state.copyWith(
-          pageIndex: state.pageIndex - 1,
+          subjectId: id,
           reverse: true,
         ),
       );
