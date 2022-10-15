@@ -21,7 +21,7 @@ class FormListTile extends StatelessWidget {
       curve: Curves.fastLinearToSlowEaseIn,
       alignment: Alignment.topRight,
       constraints: const BoxConstraints(
-        minWidth: 200,
+        minWidth: 240,
         minHeight: 40,
         maxHeight: 40,
       ),

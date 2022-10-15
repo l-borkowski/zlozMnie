@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:zloz_mnie/l10n/l10n.dart';
 import 'package:zloz_mnie/login/login.dart';
 
@@ -15,13 +16,22 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      localizationsDelegates: [
+    return MaterialApp(
+      theme: _buildTheme(),
+      localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: LoginPage(),
+      home: const LoginPage(),
+    );
+  }
+
+  ThemeData _buildTheme() {
+    final baseTheme = ThemeData(brightness: Brightness.light);
+
+    return baseTheme.copyWith(
+      textTheme: GoogleFonts.poppinsTextTheme(baseTheme.textTheme),
     );
   }
 }
