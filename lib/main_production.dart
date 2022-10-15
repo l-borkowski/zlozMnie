@@ -8,6 +8,4 @@
 import 'package:zloz_mnie/app/app.dart';
 import 'package:zloz_mnie/bootstrap.dart';
 
-void main() {
-  bootstrap(() => const App());
-}
+void main() => bootstrap(App.new);

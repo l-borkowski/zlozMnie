@@ -16,7 +16,7 @@ class FormList extends StatelessWidget {
           for (var i = 0; i < 10; i++)
             FormListTile(
               _determineText(context, i),
-              selected: state.selectedForm == i,
+              selected: state.pageIndex == i,
             ),
         ],
       ),
@@ -63,7 +63,7 @@ class FormListDots extends StatelessWidget {
       flex: 6,
       child: Column(
         children: [
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           for (var i = 0; i < 10; i++) FormListTileDot(i),
         ],
       ),

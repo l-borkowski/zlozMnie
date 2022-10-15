@@ -16,22 +16,25 @@ class FormListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: 300.milliseconds,
-      curve: Curves.fastLinearToSlowEaseIn,
+    return Container(
       alignment: Alignment.topRight,
       constraints: const BoxConstraints(
         minWidth: 240,
         minHeight: 40,
         maxHeight: 40,
       ),
-      child: Text(
-        text,
-        textAlign: TextAlign.end,
-        style: TextStyle(
-          color: selected ? Colors.white : Colors.white54,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
+      child: AnimatedOpacity(
+        opacity: selected ? 1 : 0.5,
+        duration: 500.milliseconds,
+        curve: Curves.fastOutSlowIn,
+        child: Text(
+          text,
+          textAlign: TextAlign.end,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
@@ -54,16 +57,16 @@ class FormListTileDot extends HookWidget {
       child: Column(
         children: [
           AnimatedContainer(
-            duration: 300.milliseconds,
-            curve: Curves.fastLinearToSlowEaseIn,
+            duration: 500.milliseconds,
+            curve: Curves.fastOutSlowIn,
             alignment: Alignment.topRight,
             margin: const EdgeInsets.symmetric(horizontal: 25),
             height: 13,
             width: 13,
             decoration: BoxDecoration(
-              color: state.selectedForm >= index
+              color: state.pageIndex >= index
                   ? Colors.white
-                  : Colors.transparent,
+                  : Colors.white.withOpacity(0),
               border: Border.all(color: Colors.white),
               borderRadius: BorderRadius.circular(100),
             ),
@@ -71,7 +74,7 @@ class FormListTileDot extends HookWidget {
           Flexible(
             child: Container(
               width: 1,
-              color: index != 9 ? Colors.white : Colors.transparent,
+              color: index != 9 ? Colors.white : Colors.white.withOpacity(0),
             ),
           ),
         ],
