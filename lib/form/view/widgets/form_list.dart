@@ -8,7 +8,6 @@ class FormList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<FormCubit>().state;
     return Flexible(
       flex: 6,
       child: Column(
@@ -16,7 +15,7 @@ class FormList extends StatelessWidget {
           for (var i = 0; i < 10; i++)
             FormListTile(
               _determineText(context, i),
-              selected: state.pageIndex == i,
+              i,
             ),
         ],
       ),

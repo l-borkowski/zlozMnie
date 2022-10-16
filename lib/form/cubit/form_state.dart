@@ -15,6 +15,8 @@ class FormState {
     required this.clientAddress,
     required this.clientCity,
     required this.clientZipCode,
+    this.suedEntitiesList,
+    required this.selectedSuedEntity,
   });
 
   factory FormState.initial() => const FormState(
@@ -30,6 +32,7 @@ class FormState {
         clientBusiness: '',
         clientName: '',
         clientSurname: '',
+        selectedSuedEntity: 0,
       );
 
   final int pageIndex;
@@ -44,6 +47,8 @@ class FormState {
   final String clientAddress;
   final String clientCity;
   final String clientZipCode;
+  final List<SuedEntity>? suedEntitiesList;
+  final int selectedSuedEntity;
 
   FormState copyWith({
     int? pageIndex,
@@ -59,6 +64,8 @@ class FormState {
     String? clientAddress,
     String? clientCity,
     String? clientZipCode,
+    List<SuedEntity>? suedEntitiesList,
+    int? selectedSuedEntity,
   }) {
     return FormState(
       pageIndex: pageIndex ?? this.pageIndex,
@@ -73,6 +80,8 @@ class FormState {
       clientAddress: clientAddress ?? this.clientAddress,
       clientCity: clientCity ?? this.clientCity,
       clientZipCode: clientZipCode ?? this.clientZipCode,
+      suedEntitiesList: suedEntitiesList ?? this.suedEntitiesList,
+      selectedSuedEntity: selectedSuedEntity ?? this.selectedSuedEntity,
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:lawsuit_repository/lawsuit_repository.dart';
-import 'package:lawsuit_repository/models/lawsuit_subject.dart';
+import 'package:lawsuit_repository/models/models.dart';
 
 part 'form_state.dart';
 
@@ -10,6 +10,16 @@ class FormCubit extends Cubit<FormState> {
   ) : super(FormState.initial());
 
   final LawsuitRepository _lawsuitRepository;
+
+  Future<void> init() async {
+    final suedEntities = await _lawsuitRepository.getSuedEntities();
+
+    emit(state.copyWith(suedEntitiesList: suedEntities));
+  }
+
+  void changeSuedEntity(int id) {
+    emit(state.copyWith(selectedSuedEntity: id));
+  }
 
   void nextPage() => emit(
         state.copyWith(
@@ -29,6 +39,12 @@ class FormCubit extends Cubit<FormState> {
         state.copyWith(
           pageIndex: state.pageIndex - 1,
           reverse: true,
+        ),
+      );
+  void changeView(int id) => emit(
+        state.copyWith(
+          pageIndex: id,
+          reverse: id < state.pageIndex,
         ),
       );
 
@@ -90,5 +106,3 @@ class FormCubit extends Cubit<FormState> {
     emit(state.copyWith(clientZipCode: value));
   }
 }
-
-enum ClientType { jdg, company, person }
