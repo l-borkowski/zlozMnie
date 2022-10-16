@@ -67,7 +67,11 @@ class RefundView extends HookWidget {
               Align(
                 alignment: Alignment.bottomRight,
                 child: NextButton(
-                  onPressed: context.read<FormCubit>().nextPage,
+                  onPressed: () {
+                    context.read<FormCubit>()
+                      ..nextPage()
+                      ..generateDocument();
+                  },
                 ),
               ),
               const SizedBox(height: 40),

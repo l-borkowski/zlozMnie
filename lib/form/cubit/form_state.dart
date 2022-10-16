@@ -22,6 +22,7 @@ class FormState {
     required this.mediationAdr,
     required this.iMadeAnAttempt,
     required this.attemptResult,
+    required this.generateDocumentContents,
   });
 
   factory FormState.initial() => FormState(
@@ -41,6 +42,7 @@ class FormState {
         mediationAdr: false,
         iMadeAnAttempt: false,
         attemptResult: '',
+        generateDocumentContents: [],
       );
 
   final int pageIndex;
@@ -62,6 +64,7 @@ class FormState {
   final bool mediationAdr;
   final bool iMadeAnAttempt;
   final String attemptResult;
+  final List<dynamic> generateDocumentContents;
 
   FormState copyWith({
     int? pageIndex,
@@ -84,6 +87,7 @@ class FormState {
     bool? mediationAdr,
     bool? iMadeAnAttempt,
     String? attemptResult,
+    List<dynamic>? generateDocumentContents,
   }) {
     return FormState(
       pageIndex: pageIndex ?? this.pageIndex,
@@ -105,6 +109,8 @@ class FormState {
       mediationAdr: mediationAdr ?? this.mediationAdr,
       iMadeAnAttempt: iMadeAnAttempt ?? this.iMadeAnAttempt,
       attemptResult: attemptResult ?? this.attemptResult,
+      generateDocumentContents:
+          generateDocumentContents ?? this.generateDocumentContents,
     );
   }
 }

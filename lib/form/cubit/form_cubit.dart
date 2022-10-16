@@ -218,45 +218,53 @@ class FormCubit extends Cubit<FormState> {
         ),
       );
 
-  List<dynamic> generateDocument() {
+  void generateDocument() {
     var number = '';
 
     if (state.client.clientType == ClientType.company) {
-      number = 'KRS: ${state.client.number}';
+      number = 'KRS: ${state.client.number}\n';
     }
     if (state.client.clientType == ClientType.jdg) {
-      number = 'NIP: ${state.client.number}';
+      number = 'NIP: ${state.client.number}\n';
     }
     if (state.client.clientType == ClientType.person) {
-      number = 'PESEL: ${state.client.number}';
+      number = 'PESEL: ${state.client.number}\n';
     }
 
-    return [
+    final contents = [
       /// Powód
       {
-        'insert': state.client.clientType == ClientType.company
-            ? '${state.client.business!}\n'
-            : '${state.client.name!} ${state.client.surname!}\n',
+        'insert': state.client.clientType == ClientType.person
+            ? '${state.client.name!} ${state.client.surname!}\n'
+            : '${state.client.business!}\n',
         'attributes': {'bold': true}
       },
       {
         'insert':
             '${state.client.address}, ${state.client.zipCode} ${state.client.city}\n',
       },
-      {'insert': '$number\n'},
+      {'insert': '$number'},
       {
         'insert': '-Powód-\n\n',
         'attributes': {'bold': true}
       },
 
       /// Pełnomocnik
-      /// pozniej
-      ///
+      {
+        'insert':
+            'reprezentowany przez radcę prawnego Zbigniewa Nowoczesnego\n',
+        'attributes': {'bold': true}
+      },
+      {
+        'insert':
+            'Kancelaria Radcy Prawnego Zbigniew Nowoczesny\nul. Zbąszyńska 29, 60-359 Poznań\nz.nowoczesny@kancelaria.pl\n\n',
+      },
+
       /// Pozwany
       {
-        'insert': state.client.clientType == ClientType.company
-            ? state.suedEntity.business!
-            : '${state.suedEntity.name!} ${state.suedEntity.surname!}\n',
+        'insert': state.client.clientType == ClientType.person
+            ? '${state.suedEntity.name!} ${state.suedEntity.surname!}\n'
+            : state.suedEntity.business!,
         'attributes': {'bold': true}
       },
       {
@@ -265,10 +273,67 @@ class FormCubit extends Cubit<FormState> {
       },
       {'insert': number},
       {
-        'insert': '-Powód-\n',
+        'insert': '-Pozwany-\n',
         'attributes': {'bold': true}
       },
       {'insert': '\n'},
+
+      /// Sąd
+
+      {
+        'insert': 'Sąd Rejonowy w Jaśle\n',
+        'attributes': {
+          'bold': true,
+        },
+      },
+
+      {
+        'insert': 'I Wydział Cywilny\n',
+        'attributes': {
+          'bold': true,
+        },
+      },
+
+      {
+        'insert': 'ul. Armii Krajowej 3\n38-200 Jasło\n\n',
+      },
+
+      /// WPS + OPŁATA
+      {
+        'insert':
+            'WPS: ${state.claimValue} zł\nOpłata od pozwu: 2.500,00 zł\n\n',
+        'attributes': {
+          'bold': true,
+          'underline': true,
+        },
+      },
+
+      {
+        'insert': 'POZEW\n\n',
+        'attributes': {
+          'bold': true,
+        },
+      },
+
+      if (state.reimbursement)
+        {
+          'insert':
+              'zasądzenie od Pozwanej na rzecz Powódki zwrotu kosztów procesu w całości, w tym kosztów zastępstwa procesowego oraz opłaty skarbowej od pełnomocnictwa w kwocie 17,00 zł według norm przepisanych wraz z odsetkami ustawowymi za opóźnienie od dnia uprawomocnienia się orzeczenia,\n\n',
+        },
+
+      if (state.mediationAdr)
+        {
+          'insert':
+              'Mając na uwadze przepis art 187 §1 pkt 3 kpc, Powódka wskazuje, iż podejmowała próby pozasądowego rozwiązania sporu\n\n',
+        },
+
+      if (state.iMadeAnAttempt)
+        {
+          'insert':
+              'Powód uiścił opłatę od pozwu stosownie do art. 13 ust. 2 ustawy z dnia 28 lipca 2005 r. o kosztach sądowych w sprawach cywilnych tj. z dnia 7 kwietnia 2022 r. (Dz.U. z 2022 r. poz. 1125)  w kwocie 2.500,00 złotych.\n\n',
+        },
     ];
+
+    emit(state.copyWith(generateDocumentContents: contents));
   }
 }

@@ -18,7 +18,13 @@ class FormListTile extends HookWidget {
   Widget build(BuildContext context) {
     final state = context.watch<FormCubit>().state;
     return GestureDetector(
-      onTap: () => context.read<FormCubit>().changeView(index),
+      onTap: () {
+        if (index == 6) {
+          Future.delayed(Duration(milliseconds: 200),
+              () => context.read<FormCubit>().generateDocument());
+        }
+        context.read<FormCubit>().changeView(index);
+      },
       child: Container(
         alignment: Alignment.topRight,
         constraints: const BoxConstraints(

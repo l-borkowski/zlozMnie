@@ -13,9 +13,10 @@ class ContentView extends HookWidget {
   Widget build(BuildContext context) {
     final state = context.watch<FormCubit>().state;
 
-    useEffect(() {
+    useMemoized(() {
       context.read<FormCubit>().generateDocument();
     }, []);
+
     return Scaffold(
       appBar: const FormViewAppBar(
         title: 'Treść',
@@ -43,12 +44,13 @@ class ContentView extends HookWidget {
                   children: [
                     Checkbox(
                       value: state.mediationAdr,
-                      onChanged: (val) =>
-                          context.read<FormCubit>().mediationAdrSwitched(
-                                mediationAdr: val!,
-                              ),
+                      onChanged: (val) => context.read<FormCubit>()
+                        ..mediationAdrSwitched(mediationAdr: val!)
+                        ..generateDocument(),
                     ),
-                    const Expanded(child: Text('Mediacja / ADR'))
+                    const Expanded(
+                        child: Text(
+                            'Podjąłem próbę  polubownego rozwiązania sporu, ale nie przyniosła rezultatu'))
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -56,18 +58,17 @@ class ContentView extends HookWidget {
                   children: [
                     Checkbox(
                       value: state.iMadeAnAttempt,
-                      onChanged: (val) =>
-                          context.read<FormCubit>().iMadeAnAttemptSwitched(
-                                iMadeAnAttempt: val!,
-                              ),
+                      onChanged: (val) => context.read<FormCubit>()
+                        ..iMadeAnAttemptSwitched(iMadeAnAttempt: val!)
+                        ..generateDocument(),
                     ),
                     const Expanded(
-                      child:
-                          Text('Podjąłem próbę ale nie przyniosła rezultatu'),
+                      child: Text(
+                          'Nie podjąłem próby polubownego rozwiązania sporu'),
                     )
                   ],
                 ),
-                const SizedBox(height: 20),
+                /* const SizedBox(height: 20),
                 AppTextField(
                     title: state.iMadeAnAttempt
                         ? 'Dlaczego próba nie przyniosła rezultatu'
@@ -77,7 +78,7 @@ class ContentView extends HookWidget {
                         .read<FormCubit>()
                         .attemptResultChanged(attemptResult: val ?? ''),
                     height: 48,
-                    width: double.infinity),
+                    width: double.infinity), */
                 const SizedBox(height: 30),
                 const ContentEditor(),
                 const SizedBox(height: 30),
