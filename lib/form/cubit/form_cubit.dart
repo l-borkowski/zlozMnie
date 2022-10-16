@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:lawsuit_repository/lawsuit_repository.dart';
 import 'package:lawsuit_repository/models/lawsuit_subject.dart';
+import 'package:zloz_mnie/models/proof.dart';
 
 part 'form_state.dart';
 
@@ -43,7 +43,6 @@ class FormCubit extends Cubit<FormState> {
   void claimValueChanged(String text) {
     final value = double.tryParse(text);
 
-    
     emit(state.copyWith(claimValue: value ?? 0));
   }
 
@@ -104,6 +103,12 @@ class FormCubit extends Cubit<FormState> {
     if (val == null) value = '';
     emit(state.copyWith(clientZipCode: value));
   }
+
+  void proofAdded(Proof proof) => emit(
+        state.copyWith(
+          proofs: List.from(state.proofs)..add(proof),
+        ),
+      );
 }
 
 enum ClientType { jdg, company, person }

@@ -270,6 +270,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lawsuit_repository/lawsuit_repository.dart';
 import 'package:zloz_mnie/form/form.dart';
 import 'package:zloz_mnie/form/view/claim_view.dart';
+import 'package:zloz_mnie/form/view/content_view.dart';
 import 'package:zloz_mnie/form/view/subject_view.dart';
 import 'package:zloz_mnie/form/view/widgets/shared_axis_switcher.dart';
 
@@ -371,6 +372,7 @@ class _FormPartState extends State<_FormPart> {
                 child: const [
                   SubjectView(),
                   ClaimView(),
+                  ContentView(),
                 ][state.pageIndex],
               ),
             ),
