@@ -31,30 +31,34 @@ class LawsuitRepository {
   }
 
   ///
-  Future<List<SuedEntity>> getSuedEntities() async {
-    final suedList = <SuedEntity>[
-      const SuedEntity(
+  Future<List<Entity>> getSuedEntities() async {
+    final suedList = <Entity>[
+      const Entity(
         id: 1,
-        name: 'Jakub Stefaniak',
+        name: 'Jakub',
+        surname: 'Stefaniak',
         number: '012731030312',
         address: 'ul. Jana Kilińskiego 9/123',
-        addressPt2: '80-452 Gdańsk',
         clientType: ClientType.person,
+        city: 'Gdańsk',
+        zipCode: '80-452 ',
       ),
-      const SuedEntity(
+      const Entity(
         id: 2,
-        name: 'Hurtownia Spożywcza PERKOS',
+        business: 'Hurtownia Spożywcza PERKOS',
         number: '123123123',
         address: 'ul. Jana Kilińskiego 9/123',
-        addressPt2: '80-452 Gdańsk',
+        city: 'Gdańsk',
+        zipCode: '80-452 ',
         clientType: ClientType.company,
       ),
-      const SuedEntity(
+      const Entity(
         id: 3,
-        name: 'Usługi Informatyczno-Raperskie Dżejk Stefański',
+        business: 'Usługi Informatyczno-Raperskie Dżejk Stefański',
         number: '012731030312',
         address: 'ul. Jana Kilińskiego 9/123',
-        addressPt2: '80-452 Gdańsk',
+        city: 'Gdańsk',
+        zipCode: '80-452 ',
         clientType: ClientType.jdg,
       ),
     ];

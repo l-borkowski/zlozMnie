@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lawsuit_repository/models/models.dart';
@@ -12,6 +10,7 @@ class SuedEntityView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<FormCubit>();
     final state = context.watch<FormCubit>().state;
     return Scaffold(
       appBar: const FormViewAppBar(
@@ -45,32 +44,7 @@ class SuedEntityView extends HookWidget {
             MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onTap: () => showCupertinoModalPopup<void>(
-                  context: context,
-                  builder: (context) => Material(
-                    child: Container(
-                      margin: const EdgeInsets.all(35),
-                      height: 670,
-                      width: 560,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Dodaj powoda',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                onTap: cubit.showSuedModal,
                 child: Row(
                   children: [
                     Container(
@@ -98,11 +72,21 @@ class SuedEntityView extends HookWidget {
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF4971FF),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
-            )
+            ),
+            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: NextButton(
+                onPressed: state.suedEntity != Entity.empty()
+                    ? context.read<FormCubit>().nextPage
+                    : null,
+              ),
+            ),
+            const SizedBox(height: 40),
           ],
         ),
       ),
@@ -118,7 +102,7 @@ class SuedEntityTile extends HookWidget {
   });
 
   final bool active;
-  final SuedEntity suedEntity;
+  final Entity suedEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +133,9 @@ class SuedEntityTile extends HookWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      suedEntity.name,
+                      suedEntity.clientType == ClientType.person
+                          ? '${suedEntity.name} ${suedEntity.surname}'
+                          : suedEntity.business!,
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
@@ -170,7 +156,7 @@ class SuedEntityTile extends HookWidget {
                       ),
                     ),
                     Text(
-                      suedEntity.addressPt2,
+                      '${suedEntity.city} ${suedEntity.zipCode}',
                       style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
