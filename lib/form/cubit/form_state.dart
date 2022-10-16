@@ -19,6 +19,9 @@ class FormState {
     required this.reimbursement,
     this.feeFile,
     this.proxyFile,
+    required this.mediationAdr,
+    required this.iMadeAnAttempt,
+    required this.attemptResul,
   });
 
   factory FormState.initial() => FormState(
@@ -35,6 +38,9 @@ class FormState {
         selectedSuedEntity: 0,
         showSuedModal: false,
         reimbursement: true,
+        mediationAdr: false,
+        iMadeAnAttempt: false,
+        attemptResult: '',
       );
 
   final int pageIndex;
@@ -53,6 +59,9 @@ class FormState {
   final bool reimbursement;
   final Uint8List? proxyFile;
   final Uint8List? feeFile;
+  final bool mediationAdr;
+  final bool iMadeAnAttempt;
+  final String attemptResult;
 
   FormState copyWith({
     int? pageIndex,
@@ -72,6 +81,9 @@ class FormState {
     bool? reimbursement,
     Uint8List? feeFile,
     Uint8List? proxyFile,
+    bool? mediationAdr,
+    bool? iMadeAnAttempt,
+    String? attemptResult,
   }) {
     return FormState(
       pageIndex: pageIndex ?? this.pageIndex,
@@ -90,6 +102,9 @@ class FormState {
       reimbursement: reimbursement ?? this.reimbursement,
       feeFile: feeFile ?? this.feeFile,
       proxyFile: proxyFile ?? this.proxyFile,
+      mediationAdr: mediationAdr ?? this.mediationAdr,
+      iMadeAnAttempt: iMadeAnAttempt ?? this.iMadeAnAttempt,
+      attemptResult: attemptResult ?? this.attemptResult,
     );
   }
 }

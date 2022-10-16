@@ -58,10 +58,10 @@ class FormListDots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      flex: 6,
+      flex: 8,
       child: Column(
         children: [
-          const SizedBox(height: 6),
+          const SizedBox(height: 23),
           for (var i = 0; i < 10; i++) FormListTileDot(i),
         ],
       ),

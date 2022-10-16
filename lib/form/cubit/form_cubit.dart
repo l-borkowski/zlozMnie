@@ -199,4 +199,22 @@ class FormCubit extends Cubit<FormState> {
           proofs: List.from(state.proofs)..add(proof),
         ),
       );
+
+  void mediationAdrSwitched({required bool mediationAdr}) => emit(
+        state.copyWith(
+          mediationAdr: mediationAdr,
+        ),
+      );
+
+  void iMadeAnAttemptSwitched({required bool iMadeAnAttempt}) => emit(
+        state.copyWith(
+          iMadeAnAttempt: iMadeAnAttempt,
+        ),
+      );
+
+  void attemptResultChanged({required String attemptResult}) => emit(
+        state.copyWith(
+          attemptResult: attemptResult,
+        ),
+      );
 }
