@@ -8,4 +8,6 @@
 export 'cubit/form_cubit.dart';
 export 'view/client_data_view.dart';
 export 'view/form_page.dart';
+export 'view/refund_view.dart';
+export 'view/sued_entity_view.dart';
 export 'view/widgets/widgets.dart';

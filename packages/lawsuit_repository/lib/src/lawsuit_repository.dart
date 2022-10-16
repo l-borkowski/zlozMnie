@@ -23,10 +23,46 @@ class LawsuitRepository {
   Future<List<LawsuitSubject>> getLawsuitSubjects() async {
     final subjectsJson = await _apiClient.getLawsuitSubjects();
 
-    final subjects = (subjectsJson as List)
+    final subjects = subjectsJson
         .map((json) => LawsuitSubject.fromJson(json as JsonMap))
         .toList();
 
     return subjects;
+  }
+
+  ///
+  Future<List<Entity>> getSuedEntities() async {
+    final suedList = <Entity>[
+      const Entity(
+        id: 1,
+        name: 'Jakub',
+        surname: 'Stefaniak',
+        number: '012731030312',
+        address: 'ul. Jana Kilińskiego 9/123',
+        clientType: ClientType.person,
+        city: 'Gdańsk',
+        zipCode: '80-452 ',
+      ),
+      const Entity(
+        id: 2,
+        business: 'Hurtownia Spożywcza PERKOS',
+        number: '123123123',
+        address: 'ul. Jana Kilińskiego 9/123',
+        city: 'Gdańsk',
+        zipCode: '80-452 ',
+        clientType: ClientType.company,
+      ),
+      const Entity(
+        id: 3,
+        business: 'Usługi Informatyczno-Raperskie Dżejk Stefański',
+        number: '012731030312',
+        address: 'ul. Jana Kilińskiego 9/123',
+        city: 'Gdańsk',
+        zipCode: '80-452 ',
+        clientType: ClientType.jdg,
+      ),
+    ];
+
+    return suedList;
   }
 }

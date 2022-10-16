@@ -63,6 +63,7 @@ class SubjectView extends HookWidget {
                         : null,
                   ),
                 ),
+                const SizedBox(height: 40),
               ],
             ),
           ),

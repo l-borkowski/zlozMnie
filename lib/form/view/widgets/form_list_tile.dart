@@ -4,36 +4,40 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:time/time.dart';
 import 'package:zloz_mnie/form/form.dart';
 
-class FormListTile extends StatelessWidget {
+class FormListTile extends HookWidget {
   const FormListTile(
-    this.text, {
+    this.text,
+    this.index, {
     super.key,
-    required this.selected,
   });
 
   final String text;
-  final bool selected;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.topRight,
-      constraints: const BoxConstraints(
-        minWidth: 240,
-        minHeight: 40,
-        maxHeight: 40,
-      ),
-      child: AnimatedOpacity(
-        opacity: selected ? 1 : 0.5,
-        duration: 500.milliseconds,
-        curve: Curves.fastOutSlowIn,
-        child: Text(
-          text,
-          textAlign: TextAlign.end,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+    final state = context.watch<FormCubit>().state;
+    return GestureDetector(
+      onTap: () => context.read<FormCubit>().changeView(index),
+      child: Container(
+        alignment: Alignment.topRight,
+        constraints: const BoxConstraints(
+          minWidth: 240,
+          minHeight: 40,
+          maxHeight: 40,
+        ),
+        child: AnimatedOpacity(
+          opacity: state.pageIndex == index ? 1 : 0.5,
+          duration: 500.milliseconds,
+          curve: Curves.fastOutSlowIn,
+          child: Text(
+            text,
+            textAlign: TextAlign.end,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),

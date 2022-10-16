@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:lawsuit_repository/lawsuit_repository.dart';
-import 'package:lawsuit_repository/models/lawsuit_subject.dart';
 import 'package:zloz_mnie/models/proof.dart';
+import 'package:lawsuit_repository/models/models.dart';
+
 
 part 'form_state.dart';
 
@@ -11,6 +12,35 @@ class FormCubit extends Cubit<FormState> {
   ) : super(FormState.initial());
 
   final LawsuitRepository _lawsuitRepository;
+
+  Future<void> init() async {
+    final suedEntities = await _lawsuitRepository.getSuedEntities();
+
+    emit(state.copyWith(suedEntitiesList: suedEntities));
+  }
+
+  void changeSuedEntity(int id) {
+    emit(
+      state.copyWith(
+        selectedSuedEntity: id,
+        suedEntity:
+            state.suedEntitiesList?.firstWhere((element) => element.id == id),
+      ),
+    );
+  }
+
+  // ignore: avoid_positional_boolean_parameters
+  void changeReimbursement(bool? val) {
+    emit(state.copyWith(reimbursement: val));
+  }
+
+  void showSuedModal() {
+    emit(state.copyWith(showSuedModal: true));
+  }
+
+  void hideSuedModal() {
+    emit(state.copyWith(showSuedModal: false));
+  }
 
   void nextPage() => emit(
         state.copyWith(
@@ -30,6 +60,12 @@ class FormCubit extends Cubit<FormState> {
         state.copyWith(
           subjectId: id,
           reverse: true,
+        ),
+      );
+  void changeView(int id) => emit(
+        state.copyWith(
+          pageIndex: id,
+          reverse: id < state.pageIndex,
         ),
       );
 
@@ -58,50 +94,99 @@ class FormCubit extends Cubit<FormState> {
     );
   }
 
-  void changeClientType(ClientType type) {
-    emit(state.copyWith(selectedClient: type));
+  void changeClientType(ClientType type, {required bool isClient}) {
+    Entity updatedEntity;
+    if (isClient) {
+      updatedEntity = state.client.copyWith(clientType: type);
+      emit(state.copyWith(selectedClient: type, client: updatedEntity));
+    } else {
+      updatedEntity = state.suedEntity.copyWith(clientType: type);
+      emit(state.copyWith(selectedClient: type, suedEntity: updatedEntity));
+    }
   }
 
-  void nameChanged(String? val) {
+  void nameChanged(String? val, {required bool isClient}) {
     var value = val;
     if (val == null) value = '';
-    emit(state.copyWith(clientName: value));
+    if (isClient) {
+      final updatedClient = state.client.copyWith(name: value);
+      emit(state.copyWith(client: updatedClient));
+    } else {
+      final updatedClient = state.suedEntity.copyWith(name: value);
+      emit(state.copyWith(suedEntity: updatedClient));
+    }
   }
 
-  void surnameChanged(String? val) {
+  void surnameChanged(String? val, {required bool isClient}) {
     var value = val;
     if (val == null) value = '';
-    emit(state.copyWith(clientSurname: value));
+    if (isClient) {
+      final updatedClient = state.client.copyWith(surname: value);
+      emit(state.copyWith(client: updatedClient));
+    } else {
+      final updatedClient = state.suedEntity.copyWith(surname: value);
+      emit(state.copyWith(suedEntity: updatedClient));
+    }
   }
 
-  void businessChanged(String? val) {
+  void businessChanged(String? val, {required bool isClient}) {
     var value = val;
     if (val == null) value = '';
-    emit(state.copyWith(clientBusiness: value));
+    if (isClient) {
+      final updatedClient = state.client.copyWith(business: value);
+      emit(state.copyWith(client: updatedClient));
+    } else {
+      final updatedClient = state.suedEntity.copyWith(business: value);
+      emit(state.copyWith(suedEntity: updatedClient));
+    }
   }
 
-  void numberChanged(String? val) {
+  void numberChanged(String? val, {required bool isClient}) {
     var value = val;
     if (val == null) value = '';
-    emit(state.copyWith(clientNumber: value));
+    if (isClient) {
+      final updatedClient = state.client.copyWith(number: value);
+      emit(state.copyWith(client: updatedClient));
+    } else {
+      final updatedClient = state.suedEntity.copyWith(number: value);
+      emit(state.copyWith(suedEntity: updatedClient));
+    }
   }
 
-  void addressChanged(String? val) {
+  void addressChanged(String? val, {required bool isClient}) {
     var value = val;
     if (val == null) value = '';
-    emit(state.copyWith(clientAddress: value));
+    if (isClient) {
+      final updatedClient = state.client.copyWith(address: value);
+      emit(state.copyWith(client: updatedClient));
+    } else {
+      final updatedClient = state.suedEntity.copyWith(address: value);
+      emit(state.copyWith(suedEntity: updatedClient));
+    }
   }
 
-  void cityChanged(String? val) {
+  void cityChanged(String? val, {required bool isClient}) {
     var value = val;
     if (val == null) value = '';
-    emit(state.copyWith(clientCity: value));
+    if (isClient) {
+      final updatedClient = state.client.copyWith(city: value);
+      emit(state.copyWith(client: updatedClient));
+    } else {
+      final updatedClient = state.suedEntity.copyWith(city: value);
+      emit(state.copyWith(suedEntity: updatedClient));
+    }
   }
 
-  void zipCodeChanged(String? val) {
+  void zipCodeChanged(String? val, {required bool isClient}) {
     var value = val;
     if (val == null) value = '';
-    emit(state.copyWith(clientZipCode: value));
+    if (isClient) {
+      final updatedClient = state.client.copyWith(zipCode: value);
+      emit(state.copyWith(client: updatedClient));
+    } else {
+      final updatedClient = state.suedEntity.copyWith(zipCode: value);
+      emit(state.copyWith(suedEntity: updatedClient));
+    }
   }
 
   void proofAdded(Proof proof) => emit(
@@ -110,5 +195,3 @@ class FormCubit extends Cubit<FormState> {
         ),
       );
 }
-
-enum ClientType { jdg, company, person }

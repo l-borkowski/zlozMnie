@@ -268,6 +268,8 @@ import 'package:flutter/material.dart' hide FormState;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lawsuit_repository/lawsuit_repository.dart';
+import 'package:lawsuit_repository/models/models.dart';
+import 'package:time/time.dart';
 import 'package:zloz_mnie/form/form.dart';
 import 'package:zloz_mnie/form/view/claim_view.dart';
 import 'package:zloz_mnie/form/view/content_view.dart';
@@ -288,7 +290,7 @@ class FormPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => FormCubit(
         context.read<LawsuitRepository>(),
-      ),
+      )..init(),
       child: const FormView(),
     );
   }
@@ -299,19 +301,104 @@ class FormView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<FormCubit>().state;
     return Material(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: const [
-          _ListPart(),
-          _FormPart(),
+      child: Stack(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: const [
+              _ListPart(),
+              _FormPart(),
+            ],
+          ),
+          if (state.showSuedModal)
+            GestureDetector(
+              onTap: context.read<FormCubit>().hideSuedModal,
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.black.withOpacity(0.1),
+                child: Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(35),
+                    height: 670,
+                    width: 570,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Dodaj powoda',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            ClientTypeButton(
+                              'Osoba fizyczna',
+                              ClientType.person,
+                              height: 50,
+                              width: 155,
+                              isClient: false,
+                            ),
+                            ClientTypeButton(
+                              'Firma / Spółka',
+                              ClientType.company,
+                              height: 50,
+                              width: 155,
+                              isClient: false,
+                            ),
+                            ClientTypeButton(
+                              'JDG',
+                              ClientType.jdg,
+                              height: 50,
+                              width: 155,
+                              isClient: false,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 34),
+                        const EntityInfoForm(isClient: false),
+                        const SizedBox(height: 34),
+                        TextButton(
+                          onPressed: context.read<FormCubit>().hideSuedModal,
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 185,
+                              vertical: 18,
+                            ),
+                            backgroundColor: const Color(0xFF4971FF),
+                          ),
+                          child: const Text(
+                            'Dodaj powoda',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
   }
 }
 
-class _ListPart extends StatelessWidget {
+class _ListPart extends HookWidget {
   const _ListPart();
 
   @override
@@ -372,6 +459,9 @@ class _FormPartState extends State<_FormPart> {
                 child: const [
                   SubjectView(),
                   ClaimView(),
+                  ClientDataView(),
+                  SuedEntityView(),
+                  RefundView(),
                   ContentView(),
                 ][state.pageIndex],
               ),

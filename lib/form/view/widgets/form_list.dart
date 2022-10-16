@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zloz_mnie/form/form.dart';
 import 'package:zloz_mnie/l10n/l10n.dart';
 
@@ -8,7 +7,6 @@ class FormList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<FormCubit>().state;
     return Flexible(
       flex: 6,
       child: Column(
@@ -16,7 +14,7 @@ class FormList extends StatelessWidget {
           for (var i = 0; i < 10; i++)
             FormListTile(
               _determineText(context, i),
-              selected: state.pageIndex == i,
+              i,
             ),
         ],
       ),

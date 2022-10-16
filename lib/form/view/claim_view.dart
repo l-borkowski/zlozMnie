@@ -109,6 +109,7 @@ class ClaimView extends HookWidget {
                         : null,
                   ),
                 ),
+                const SizedBox(height: 40),
               ],
             ),
           ),
