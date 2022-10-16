@@ -287,7 +287,7 @@ class FormPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => FormCubit(
         context.read<LawsuitRepository>(),
-      ),
+      )..init(),
       child: const FormView(),
     );
   }
@@ -371,6 +371,8 @@ class _FormPartState extends State<_FormPart> {
                 child: const [
                   SubjectView(),
                   ClaimView(),
+                  ClientDataView(),
+                  SuedEntityView(),
                 ][state.pageIndex],
               ),
             ),
