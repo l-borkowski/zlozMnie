@@ -23,8 +23,8 @@ class FormListTile extends HookWidget {
         alignment: Alignment.topRight,
         constraints: const BoxConstraints(
           minWidth: 240,
-          minHeight: 40,
-          maxHeight: 40,
+          minHeight: 55,
+          maxHeight: 55,
         ),
         child: AnimatedOpacity(
           opacity: state.pageIndex == index ? 1 : 0.5,
@@ -57,7 +57,7 @@ class FormListTileDot extends HookWidget {
   Widget build(BuildContext context) {
     final state = context.watch<FormCubit>().state;
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 40, maxHeight: 40),
+      constraints: const BoxConstraints(minHeight: 55, maxHeight: 55),
       child: Column(
         children: [
           AnimatedContainer(
