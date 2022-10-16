@@ -464,29 +464,12 @@ class _FormPartState extends State<_FormPart> {
                   ProxyView(),
                   RefundView(),
                   ContentView(),
+                  SummaryView(),
+                  FeeView(),
+                  SignatureView(),
                 ][state.pageIndex],
               ),
             ),
-            /* Row(
-                children: [
-                  TextButton(
-                    child: const Text("Next child"),
-                    onPressed: () {
-                      setState(() {
-                        index--;
-                      });
-                    },
-                  ),
-                  TextButton(
-                    child: const Text("Next child"),
-                    onPressed: () {
-                      setState(() {
-                        index++;
-                      });
-                    },
-                  ),
-                ],
-              ), */
           ],
         ),
       ),

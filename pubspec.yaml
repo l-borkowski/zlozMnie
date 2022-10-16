@@ -21,14 +21,12 @@ dependencies:
   flutter_quill: ^6.0.8+1
   google_fonts: ^3.0.1
   intl: ^0.17.0
-  lawsuit_repository: 
+  lawsuit_repository:
     path: packages/lawsuit_repository
   money_input_formatter: ^2.0.0
   time: ^2.1.3
   zloz_mnie_api_client:
     path: packages/zloz_mnie_api_client
-
-
 
 dev_dependencies:
   bloc_test: ^9.1.0
@@ -40,3 +38,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  assets:
+    - assets/

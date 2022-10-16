@@ -21,7 +21,7 @@ class FormState {
     this.proxyFile,
     required this.mediationAdr,
     required this.iMadeAnAttempt,
-    required this.attemptResul,
+    required this.attemptResult,
   });
 
   factory FormState.initial() => FormState(

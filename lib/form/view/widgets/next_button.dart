@@ -5,9 +5,11 @@ class NextButton extends StatelessWidget {
   const NextButton({
     super.key,
     this.onPressed,
+    this.text,
   });
 
   final VoidCallback? onPressed;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,9 @@ class NextButton extends StatelessWidget {
           ),
           backgroundColor: const Color(0xFF4971FF),
         ),
-        child: const Text(
-          'Dalej',
-          style: TextStyle(
+        child: Text(
+          text ?? 'Dalej',
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.white,
