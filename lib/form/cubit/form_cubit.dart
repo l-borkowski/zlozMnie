@@ -27,6 +27,11 @@ class FormCubit extends Cubit<FormState> {
     );
   }
 
+  // ignore: avoid_positional_boolean_parameters
+  void changeReimbursement(bool? val) {
+    emit(state.copyWith(reimbursement: val));
+  }
+
   void showSuedModal() {
     emit(state.copyWith(showSuedModal: true));
   }

@@ -460,6 +460,7 @@ class _FormPartState extends State<_FormPart> {
                   ClaimView(),
                   ClientDataView(),
                   SuedEntityView(),
+                  RefundView(),
                 ][state.pageIndex],
               ),
             ),

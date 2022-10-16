@@ -15,6 +15,7 @@ class FormState {
     this.suedEntitiesList,
     required this.selectedSuedEntity,
     required this.showSuedModal,
+    required this.reimbursement,
   });
 
   factory FormState.initial() => FormState(
@@ -29,6 +30,7 @@ class FormState {
         suedEntity: Entity.empty(),
         selectedSuedEntity: 0,
         showSuedModal: false,
+        reimbursement: true,
       );
 
   final int pageIndex;
@@ -44,6 +46,7 @@ class FormState {
   final List<Entity>? suedEntitiesList;
   final int selectedSuedEntity;
   final bool showSuedModal;
+  final bool reimbursement;
 
   FormState copyWith({
     int? pageIndex,
@@ -59,6 +62,7 @@ class FormState {
     List<Entity>? suedEntitiesList,
     int? selectedSuedEntity,
     bool? showSuedModal,
+    bool? reimbursement,
   }) {
     return FormState(
       pageIndex: pageIndex ?? this.pageIndex,
@@ -73,6 +77,7 @@ class FormState {
       selectedSuedEntity: selectedSuedEntity ?? this.selectedSuedEntity,
       showSuedModal: showSuedModal ?? this.showSuedModal,
       suedEntity: suedEntity ?? this.suedEntity,
+      reimbursement: reimbursement ?? this.reimbursement,
     );
   }
 }
