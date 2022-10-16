@@ -461,6 +461,7 @@ class _FormPartState extends State<_FormPart> {
                   ClaimView(),
                   ClientDataView(),
                   SuedEntityView(),
+                  ProxyView(),
                   RefundView(),
                   ContentView(),
                 ][state.pageIndex],
