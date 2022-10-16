@@ -43,20 +43,21 @@ class RefundView extends HookWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
+                        SizedBox(height: 3),
                         Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                          'Dodaj klauzulę dotyczącą zwrotu kosztów procesu i odsetek.',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                           ),
                         ),
-                        Text(
+                        /* Text(
                           '''sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ''',
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontSize: 16,
                           ),
-                        ),
+                        ), */
                       ],
                     ),
                   ),
