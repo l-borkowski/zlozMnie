@@ -1,8 +1,10 @@
+// ignore_for_file: avoid_setters_without_getters
+
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:lawsuit_repository/lawsuit_repository.dart';
 import 'package:zloz_mnie/models/proof.dart';
 import 'package:lawsuit_repository/models/models.dart';
-
 
 part 'form_state.dart';
 
@@ -28,6 +30,9 @@ class FormCubit extends Cubit<FormState> {
       ),
     );
   }
+
+  set proxyFile(Uint8List val) => state.copyWith(proxyFile: val);
+  set feeFile(Uint8List val) => state.copyWith(feeFile: val);
 
   // ignore: avoid_positional_boolean_parameters
   void changeReimbursement(bool? val) {

@@ -17,7 +17,8 @@ class FormState {
     required this.selectedSuedEntity,
     required this.showSuedModal,
     required this.reimbursement,
-
+    this.feeFile,
+    this.proxyFile,
   });
 
   factory FormState.initial() => FormState(
@@ -34,7 +35,6 @@ class FormState {
         selectedSuedEntity: 0,
         showSuedModal: false,
         reimbursement: true,
-
       );
 
   final int pageIndex;
@@ -51,7 +51,8 @@ class FormState {
   final int selectedSuedEntity;
   final bool showSuedModal;
   final bool reimbursement;
-
+  final Uint8List? proxyFile;
+  final Uint8List? feeFile;
 
   FormState copyWith({
     int? pageIndex,
@@ -69,6 +70,8 @@ class FormState {
     int? selectedSuedEntity,
     bool? showSuedModal,
     bool? reimbursement,
+    Uint8List? feeFile,
+    Uint8List? proxyFile,
   }) {
     return FormState(
       pageIndex: pageIndex ?? this.pageIndex,
@@ -85,7 +88,8 @@ class FormState {
       showSuedModal: showSuedModal ?? this.showSuedModal,
       suedEntity: suedEntity ?? this.suedEntity,
       reimbursement: reimbursement ?? this.reimbursement,
-
+      feeFile: feeFile ?? this.feeFile,
+      proxyFile: proxyFile ?? this.proxyFile,
     );
   }
 }
