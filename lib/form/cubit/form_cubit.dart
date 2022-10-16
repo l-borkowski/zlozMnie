@@ -217,4 +217,58 @@ class FormCubit extends Cubit<FormState> {
           attemptResult: attemptResult,
         ),
       );
+
+  List<dynamic> generateDocument() {
+    var number = '';
+
+    if (state.client.clientType == ClientType.company) {
+      number = 'KRS: ${state.client.number}';
+    }
+    if (state.client.clientType == ClientType.jdg) {
+      number = 'NIP: ${state.client.number}';
+    }
+    if (state.client.clientType == ClientType.person) {
+      number = 'PESEL: ${state.client.number}';
+    }
+
+    return [
+      /// Powód
+      {
+        'insert': state.client.clientType == ClientType.company
+            ? '${state.client.business!}\n'
+            : '${state.client.name!} ${state.client.surname!}\n',
+        'attributes': {'bold': true}
+      },
+      {
+        'insert':
+            '${state.client.address}, ${state.client.zipCode} ${state.client.city}\n',
+      },
+      {'insert': '$number\n'},
+      {
+        'insert': '-Powód-\n\n',
+        'attributes': {'bold': true}
+      },
+
+      /// Pełnomocnik
+      /// pozniej
+      ///
+      /// Pozwany
+      {
+        'insert': state.client.clientType == ClientType.company
+            ? state.suedEntity.business!
+            : '${state.suedEntity.name!} ${state.suedEntity.surname!}\n',
+        'attributes': {'bold': true}
+      },
+      {
+        'insert':
+            '${state.suedEntity.address}, ${state.suedEntity.zipCode} ${state.suedEntity.city}\n',
+      },
+      {'insert': number},
+      {
+        'insert': '-Powód-\n',
+        'attributes': {'bold': true}
+      },
+      {'insert': '\n'},
+    ];
+  }
 }
