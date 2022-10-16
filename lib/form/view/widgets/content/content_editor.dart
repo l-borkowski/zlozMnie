@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +16,29 @@ class ContentEditor extends StatefulWidget {
 }
 
 class _ContentEditorState extends State<ContentEditor> {
-  final _controller = quill.QuillController.basic();
+  var _controller = quill.QuillController.basic();
 
   int selectedTextLength = 0;
 
+
+  /* {insert:
+ul. Jana Kilińskiego 9/29
+Gdańsk, 80-452,
+PESEL: 12345678910
+}, {insert: DevTalents Sp zoo, attributes: {bold: true}}, {insert:
+al. Jerozolimskie 231/312
+Warszawa, 00-001
+KRS: 112321312324
+}, {insert: Anna Grażka-Chechło, attributes: {bold: true}}, {insert:
+prowadząca działalność gospodarczą pod firmą
+Anna Grażka-Chechło Gabinet Stomatologiczny Heheszki Stomatologia
+ul. Nowa 15 E, 89-240 Kcynia
+NIP: 5581745678
+}, {insert: Pozwany:, attributes: {bold: true, underline: true}}, {insert:
+Imię Nazwisko
+ul. Testowa 12/34
+Gdańsk, 80-452
+} */
   @override
   void initState() {
     super.initState();
@@ -35,6 +56,21 @@ class _ContentEditorState extends State<ContentEditor> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        TextButton(
+            onPressed: () {
+              final json = _controller.document.toDelta().toJson();
+              print(json);
+            },
+            child: const Text('toJson')),
+        TextButton(
+          onPressed: () {
+            final json = context.read<FormCubit>().generateDocument();
+            final doc = quill.Document.fromJson(json);
+            
+            _controller.document = doc;
+          },
+          child: const Text('fromJson'),
+        ),
         Container(
           padding: const EdgeInsets.all(8),
           width: double.infinity,

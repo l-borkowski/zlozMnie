@@ -13,6 +13,9 @@ class ContentView extends HookWidget {
   Widget build(BuildContext context) {
     final state = context.watch<FormCubit>().state;
 
+    useEffect(() {
+      context.read<FormCubit>().generateDocument();
+    }, []);
     return Scaffold(
       appBar: const FormViewAppBar(
         title: 'Treść',
