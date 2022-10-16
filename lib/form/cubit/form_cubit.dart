@@ -3,7 +3,6 @@ import 'package:lawsuit_repository/lawsuit_repository.dart';
 import 'package:zloz_mnie/models/proof.dart';
 import 'package:lawsuit_repository/models/models.dart';
 
-
 part 'form_state.dart';
 
 class FormCubit extends Cubit<FormState> {
@@ -192,6 +191,24 @@ class FormCubit extends Cubit<FormState> {
   void proofAdded(Proof proof) => emit(
         state.copyWith(
           proofs: List.from(state.proofs)..add(proof),
+        ),
+      );
+
+  void mediationAdrSwitched({required bool mediationAdr}) => emit(
+        state.copyWith(
+          mediationAdr: mediationAdr,
+        ),
+      );
+
+  void iMadeAnAttemptSwitched({required bool iMadeAnAttempt}) => emit(
+        state.copyWith(
+          iMadeAnAttempt: iMadeAnAttempt,
+        ),
+      );
+
+  void attemptResultChanged({required String attemptResult}) => emit(
+        state.copyWith(
+          attemptResult: attemptResult,
         ),
       );
 }

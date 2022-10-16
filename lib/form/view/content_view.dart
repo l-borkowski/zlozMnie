@@ -35,6 +35,47 @@ class ContentView extends HookWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: state.mediationAdr,
+                      onChanged: (val) =>
+                          context.read<FormCubit>().mediationAdrSwitched(
+                                mediationAdr: val!,
+                              ),
+                    ),
+                    const Expanded(child: Text('Mediacja / ADR'))
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: state.iMadeAnAttempt,
+                      onChanged: (val) =>
+                          context.read<FormCubit>().iMadeAnAttemptSwitched(
+                                iMadeAnAttempt: val!,
+                              ),
+                    ),
+                    const Expanded(
+                      child:
+                          Text('Podjąłem próbę ale nie przyniosła rezultatu'),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+                AppTextField(
+                    title: state.iMadeAnAttempt
+                        ? 'Dlaczego próba nie przyniosła rezultatu'
+                        : 'Dlaczego próba nie została podjęta',
+                    hint: 'Powód',
+                    onChanged: (val) => context
+                        .read<FormCubit>()
+                        .attemptResultChanged(attemptResult: val ?? ''),
+                    height: 48,
+                    width: double.infinity),
+                const SizedBox(height: 30),
                 const ContentEditor(),
                 const SizedBox(height: 30),
                 if (state.proofs.isNotEmpty) ...[

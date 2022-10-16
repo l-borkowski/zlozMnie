@@ -2,40 +2,42 @@
 part of 'form_cubit.dart';
 
 class FormState {
-  const FormState({
-    required this.pageIndex,
-    required this.reverse,
-    required this.subjectId,
-    required this.claimId,
-    required this.claimValue,
-    required this.lawsuitSubjects,
-    required this.selectedClient,
-    required this.proofs,
-    required this.client,
-    required this.suedEntity,
-    this.suedEntitiesList,
-    required this.selectedSuedEntity,
-    required this.showSuedModal,
-    required this.reimbursement,
-
-  });
+  const FormState(
+      {required this.pageIndex,
+      required this.reverse,
+      required this.subjectId,
+      required this.claimId,
+      required this.claimValue,
+      required this.lawsuitSubjects,
+      required this.selectedClient,
+      required this.proofs,
+      required this.client,
+      required this.suedEntity,
+      this.suedEntitiesList,
+      required this.selectedSuedEntity,
+      required this.showSuedModal,
+      required this.reimbursement,
+      required this.mediationAdr,
+      required this.iMadeAnAttempt,
+      required this.attemptResult});
 
   factory FormState.initial() => FormState(
-        pageIndex: 0,
-        reverse: false,
-        subjectId: -1,
-        claimId: 0,
-        claimValue: 0,
-        lawsuitSubjects: [],
-        selectedClient: ClientType.person,
-        proofs: [],
-        client: Entity.empty(),
-        suedEntity: Entity.empty(),
-        selectedSuedEntity: 0,
-        showSuedModal: false,
-        reimbursement: true,
-
-      );
+      pageIndex: 0,
+      reverse: false,
+      subjectId: -1,
+      claimId: 0,
+      claimValue: 0,
+      lawsuitSubjects: [],
+      selectedClient: ClientType.person,
+      proofs: [],
+      client: Entity.empty(),
+      suedEntity: Entity.empty(),
+      selectedSuedEntity: 0,
+      showSuedModal: false,
+      reimbursement: true,
+      mediationAdr: false,
+      iMadeAnAttempt: false,
+      attemptResult: '');
 
   final int pageIndex;
   final bool reverse;
@@ -51,7 +53,9 @@ class FormState {
   final int selectedSuedEntity;
   final bool showSuedModal;
   final bool reimbursement;
-
+  final bool mediationAdr;
+  final bool iMadeAnAttempt;
+  final String attemptResult;
 
   FormState copyWith({
     int? pageIndex,
@@ -69,6 +73,9 @@ class FormState {
     int? selectedSuedEntity,
     bool? showSuedModal,
     bool? reimbursement,
+    bool? mediationAdr,
+    bool? iMadeAnAttempt,
+    String? attemptResult,
   }) {
     return FormState(
       pageIndex: pageIndex ?? this.pageIndex,
@@ -85,7 +92,9 @@ class FormState {
       showSuedModal: showSuedModal ?? this.showSuedModal,
       suedEntity: suedEntity ?? this.suedEntity,
       reimbursement: reimbursement ?? this.reimbursement,
-
+      mediationAdr: mediationAdr ?? this.mediationAdr,
+      iMadeAnAttempt: iMadeAnAttempt ?? this.iMadeAnAttempt,
+      attemptResult: attemptResult ?? this.attemptResult,
     );
   }
 }
