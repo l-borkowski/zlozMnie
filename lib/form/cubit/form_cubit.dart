@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:lawsuit_repository/lawsuit_repository.dart';
+import 'package:zloz_mnie/models/proof.dart';
 import 'package:lawsuit_repository/models/models.dart';
+
 
 part 'form_state.dart';
 
@@ -186,4 +188,10 @@ class FormCubit extends Cubit<FormState> {
       emit(state.copyWith(suedEntity: updatedClient));
     }
   }
+
+  void proofAdded(Proof proof) => emit(
+        state.copyWith(
+          proofs: List.from(state.proofs)..add(proof),
+        ),
+      );
 }

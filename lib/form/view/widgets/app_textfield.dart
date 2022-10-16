@@ -10,6 +10,7 @@ class AppTextField extends HookWidget {
     required this.onChanged,
     required this.height,
     required this.width,
+    this.initialText = '',
   });
 
   final String title;
@@ -17,10 +18,11 @@ class AppTextField extends HookWidget {
   final void Function(String?) onChanged;
   final double height;
   final double width;
+  final String initialText;
 
   @override
   Widget build(BuildContext context) {
-    final controller = useTextEditingController();
+    final controller = useTextEditingController(text: initialText);
     final focusNode = useFocusNode();
     final hasFocus = useState(false);
 

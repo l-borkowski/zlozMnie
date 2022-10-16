@@ -10,12 +10,14 @@ class FormState {
     required this.claimValue,
     required this.lawsuitSubjects,
     required this.selectedClient,
+    required this.proofs,
     required this.client,
     required this.suedEntity,
     this.suedEntitiesList,
     required this.selectedSuedEntity,
     required this.showSuedModal,
     required this.reimbursement,
+
   });
 
   factory FormState.initial() => FormState(
@@ -26,11 +28,13 @@ class FormState {
         claimValue: 0,
         lawsuitSubjects: [],
         selectedClient: ClientType.person,
+        proofs: [],
         client: Entity.empty(),
         suedEntity: Entity.empty(),
         selectedSuedEntity: 0,
         showSuedModal: false,
         reimbursement: true,
+
       );
 
   final int pageIndex;
@@ -38,15 +42,16 @@ class FormState {
   final int subjectId;
   final int claimId;
   final double? claimValue;
-
   final List<LawsuitSubject> lawsuitSubjects;
   final ClientType selectedClient;
+  final List<Proof> proofs;
   final Entity client;
   final Entity suedEntity;
   final List<Entity>? suedEntitiesList;
   final int selectedSuedEntity;
   final bool showSuedModal;
   final bool reimbursement;
+
 
   FormState copyWith({
     int? pageIndex,
@@ -57,6 +62,7 @@ class FormState {
     List<LawsuitSubject>? lawsuitSubjects,
     int? selectedForm,
     ClientType? selectedClient,
+    List<Proof>? proofs,
     Entity? client,
     Entity? suedEntity,
     List<Entity>? suedEntitiesList,
@@ -72,12 +78,14 @@ class FormState {
       claimValue: claimValue ?? this.claimValue,
       lawsuitSubjects: lawsuitSubjects ?? this.lawsuitSubjects,
       selectedClient: selectedClient ?? this.selectedClient,
+      proofs: proofs ?? this.proofs,
       client: client ?? this.client,
       suedEntitiesList: suedEntitiesList ?? this.suedEntitiesList,
       selectedSuedEntity: selectedSuedEntity ?? this.selectedSuedEntity,
       showSuedModal: showSuedModal ?? this.showSuedModal,
       suedEntity: suedEntity ?? this.suedEntity,
       reimbursement: reimbursement ?? this.reimbursement,
+
     );
   }
 }

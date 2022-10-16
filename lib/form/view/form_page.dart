@@ -272,6 +272,7 @@ import 'package:lawsuit_repository/models/models.dart';
 import 'package:time/time.dart';
 import 'package:zloz_mnie/form/form.dart';
 import 'package:zloz_mnie/form/view/claim_view.dart';
+import 'package:zloz_mnie/form/view/content_view.dart';
 import 'package:zloz_mnie/form/view/subject_view.dart';
 import 'package:zloz_mnie/form/view/widgets/shared_axis_switcher.dart';
 
@@ -461,6 +462,7 @@ class _FormPartState extends State<_FormPart> {
                   ClientDataView(),
                   SuedEntityView(),
                   RefundView(),
+                  ContentView(),
                 ][state.pageIndex],
               ),
             ),
